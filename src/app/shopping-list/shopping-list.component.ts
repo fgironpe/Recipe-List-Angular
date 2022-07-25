@@ -28,4 +28,8 @@ ngOnDestroy() {
   this.igChangesSub.unsubscribe();
 }
 
+  onEditItem(index: number) {
+    this.slService.startedEditting.next(index);
+  }
+
 }
