@@ -25,7 +25,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      'API_URL',
+      'APP_URL',
       {
         email,
         password,
@@ -46,7 +46,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      'API_URL',
+      'APP_URL',
       {
         email,
         password,

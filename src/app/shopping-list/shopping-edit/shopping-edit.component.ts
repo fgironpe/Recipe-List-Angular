@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { LoggingService } from '../../logging.service';
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
@@ -16,10 +17,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private slService: ShoppingListService) { }
+  constructor(private slService: ShoppingListService, private loggingService: LoggingService) { }
 
   ngOnInit(): void {
-    this.subscription = this.slService.startedEditting.subscribe((index: number) => {
+    this.subscription = this.slService.startedEditing.subscribe(( index: number) => {
       this.editedItemIndex = index;
       this.editedItem = this.slService.getIngredient(index);
       this.editMode = true;
@@ -28,6 +29,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         amount: this.editedItem.amount
       });
     });
+
+    this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit');
   }
 
   ngOnDestroy() {
@@ -56,6 +59,4 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.slService.deleteIngredient(this.editedItemIndex);
     this.onClear();
   }
-
-
 }

@@ -29,7 +29,7 @@ ngOnDestroy() {
 }
 
   onEditItem(index: number) {
-    this.slService.startedEditting.next(index);
+    this.slService.startedEditing.next(index);
   }
 
 }
